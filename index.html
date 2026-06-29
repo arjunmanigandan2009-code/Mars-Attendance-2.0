@@ -86,11 +86,12 @@
         <button class="print-btn" id="printBtn">Print</button>
       </div>
     </div>
-    <div id="printReport"></div>
     <div class="footer">
       Mars Attendance &copy;2026 All Rights Reserved &mdash; <a href="https://arjunmanigandan.vercel.app/" target="_blank" rel="noopener" class="footer-link">Contact Developer</a>
     </div>
   </div>
+
+  <div id="printReport"></div>
 
   <!-- Edit Modal -->
   <div class="modal-overlay" id="editModal">
@@ -335,7 +336,7 @@
           const catClass = s.category ? `badge-${s.category}` : 'badge-hostel';
           const clsLabel = s.class === '12' ? '12th' : '10th';
           const btns = [
-            { action: 'holiday', label: 'Holiday', short: 'H' },
+            { action: 'hostel', label: 'Hostel', short: 'H' },
             { action: 'absent', label: 'Absent', short: 'A' },
             { action: 'present', label: 'Present', short: 'P' },
           ].sort((a, b) => {
@@ -380,7 +381,7 @@
         const isActive = a === status;
         b.classList.toggle('active', isActive);
         b.textContent = isActive
-          ? (a === 'present' ? 'Present' : a === 'absent' ? 'Absent' : 'Holiday')
+          ? (a === 'present' ? 'Present' : a === 'absent' ? 'Absent' : 'Hostel')
           : (a === 'present' ? 'P' : a === 'absent' ? 'A' : 'H');
       });
 
@@ -430,7 +431,7 @@
       const id = parseInt(card.dataset.id);
       const action = btn.dataset.action;
 
-      if (action === 'present' || action === 'absent' || action === 'holiday') {
+      if (action === 'present' || action === 'absent' || action === 'hostel') {
         const key = toKey(currentDate);
         const current = getSessionAtt(key, id, currentSession);
         const newStatus = current === action ? null : action;
@@ -505,7 +506,7 @@
       const stats = students.map(s => {
         let present = 0;
         let absent = 0;
-        let holiday = 0;
+        let hostel = 0;
         days.forEach(d => {
           const key = toKey(d);
           const mStatus = getSessionAtt(key, s.id, 'morning');
@@ -513,15 +514,15 @@
           [mStatus, aStatus].forEach(status => {
             if (status === 'present') present++;
             else if (status === 'absent') absent++;
-            else if (status === 'holiday') holiday++;
+            else if (status === 'hostel') hostel++;
           });
         });
-        return { ...s, present, absent, holiday, total: present + absent };
+        return { ...s, present, absent, hostel, total: present + absent };
       });
 
       const totalPresent = stats.reduce((a, s) => a + s.present, 0);
       const totalAbsent = stats.reduce((a, s) => a + s.absent, 0);
-      const totalHoliday = stats.reduce((a, s) => a + s.holiday, 0);
+      const totalHostel = stats.reduce((a, s) => a + s.hostel, 0);
       const totalSessions = stats.reduce((a, s) => a + s.total, 0);
       const rate = totalSessions > 0 ? Math.round((totalPresent / totalSessions) * 100) : 0;
 
@@ -542,9 +543,9 @@
             <div class="stat-num">${totalAbsent}</div>
             <div class="stat-label">Absent</div>
           </div>
-          <div class="stat-card holiday">
-            <div class="stat-num">${totalHoliday}</div>
-            <div class="stat-label">Holiday</div>
+          <div class="stat-card hostel">
+            <div class="stat-num">${totalHostel}</div>
+            <div class="stat-label">Hostel</div>
           </div>
           <div class="stat-card rate">
             <div class="stat-num">${rate}%</div>
@@ -576,7 +577,7 @@
                     <td>${s.category ? s.category.charAt(0).toUpperCase() + s.category.slice(1) : '-'}</td>
                     <td class="status-present">${s.present}</td>
                     <td class="status-absent">${s.absent}</td>
-                    <td class="status-holiday">${s.holiday}</td>
+                    <td class="status-hostel">${s.hostel}</td>
                     <td><strong>${r}%</strong></td>
                   </tr>
                 `;
@@ -643,6 +644,10 @@
           <thead><tr><th>Roll.No</th><th>Name</th><th>Class</th><th>Category</th><th>Morning</th><th>Afternoon</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
+        <div class="print-footer">
+          Mars Attendance &copy;2026 All Rights Reserved<br>
+          Created by ARJUN M
+        </div>
       `;
 
       setTimeout(() => {

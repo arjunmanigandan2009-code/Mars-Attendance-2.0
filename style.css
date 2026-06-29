@@ -690,7 +690,7 @@ body {
 .btn-present.active {
   background: var(--success);
   color: #fff;
-  box-shadow: 0 0 18px var(--success-glow), 0 0 40px var(--success-glow);
+  box-shadow: 0 0 28px var(--success-glow), 0 0 60px var(--success-glow);
   animation: scalePop 0.35s var(--ease-spring);
 }
 
@@ -703,7 +703,7 @@ body {
 
 .btn-present:active,
 .btn-absent:active,
-.btn-holiday:active {
+.btn-hostel:active {
   transform: scale(0.88);
   transition-duration: 0.08s;
 }
@@ -717,7 +717,7 @@ body {
 .btn-absent.active {
   background: var(--danger);
   color: #fff;
-  box-shadow: 0 0 18px var(--danger-glow), 0 0 40px var(--danger-glow);
+  box-shadow: 0 0 28px var(--danger-glow), 0 0 60px var(--danger-glow);
   animation: scalePop 0.35s var(--ease-spring);
 }
 
@@ -728,20 +728,20 @@ body {
   box-shadow: 0 2px 12px var(--danger-glow);
 }
 
-.btn-holiday {
+.btn-hostel {
   background: var(--warning-bg);
   color: var(--warning);
   border-color: var(--warning);
 }
 
-.btn-holiday.active {
+.btn-hostel.active {
   background: var(--warning);
   color: #fff;
-  box-shadow: 0 0 18px var(--warning-glow), 0 0 40px var(--warning-glow);
+  box-shadow: 0 0 28px var(--warning-glow), 0 0 60px var(--warning-glow);
   animation: scalePop 0.35s var(--ease-spring);
 }
 
-.btn-holiday:hover:not(.active) {
+.btn-hostel:hover:not(.active) {
   background: var(--warning);
   color: #fff;
   transform: scale(1.06);
@@ -880,7 +880,7 @@ body {
 
 .stat-card.present:hover { border-color: var(--success); }
 .stat-card.absent:hover  { border-color: var(--danger); }
-.stat-card.holiday:hover { border-color: var(--warning); }
+.stat-card.hostel:hover { border-color: #6d28d9; }
 .stat-card.rate:hover    { border-color: var(--primary); }
 
 .stat-card .stat-num {
@@ -896,7 +896,7 @@ body {
 
 .stat-card.present .stat-num { color: var(--success); }
 .stat-card.absent .stat-num  { color: var(--danger); }
-.stat-card.holiday .stat-num { color: var(--warning); }
+.stat-card.hostel .stat-num { color: #6d28d9; }
 .stat-card.rate .stat-num    { color: var(--primary); }
 
 .stat-card .stat-label {
@@ -955,7 +955,7 @@ body {
 
 .status-present { color: var(--success); font-weight: 700; }
 .status-absent  { color: var(--danger); font-weight: 700; }
-.status-holiday { color: var(--warning); font-weight: 700; }
+.status-hostel { color: var(--warning); font-weight: 700; }
 
 /* ===== Empty State ===== */
 .empty-state {
@@ -1270,13 +1270,10 @@ body {
 
 /* ===== Print Styles ===== */
 @media print {
-  body * { visibility: hidden; }
-  #printReport, #printReport * { visibility: visible; }
+  .container { display: none !important; }
   #printReport {
     display: block !important;
-    position: fixed;
-    inset: 0;
-    padding: 30px;
+    padding: 30px 30px 10px;
     font-family: 'Century Gothic', sans-serif;
     color: #000;
     background: #fff;
@@ -1302,6 +1299,15 @@ body {
   #printReport th {
     background: #e0e0e0;
     font-weight: 700;
+  }
+  #printReport .print-footer {
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
   }
 }
 
