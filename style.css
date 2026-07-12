@@ -130,9 +130,11 @@ body {
 }
 
 @keyframes scalePop {
-  0%   { transform: scale(1); }
-  40%  { transform: scale(1.12); }
-  100% { transform: scale(1); }
+  0%   { transform: scale(1); opacity: 0.8; }
+  15%  { transform: scale(0.92); opacity: 0.9; }
+  50%  { transform: scale(1.1); opacity: 1; }
+  85%  { transform: scale(0.97); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
 }
 
 @keyframes pulse {
@@ -706,10 +708,16 @@ body {
   font-weight: 700;
   font-size: 13px;
   cursor: pointer;
-  transition: transform 1.3s var(--ease-out), background 0.3s, color 0.3s, box-shadow 0.3s;
+  transition: max-width 0.35s var(--ease-smooth), transform 1.3s var(--ease-out), background 0.3s, color 0.3s, box-shadow 0.3s;
   position: relative;
   will-change: transform;
   white-space: nowrap;
+  overflow: hidden;
+  max-width: 30px;
+}
+
+.actions .attn-btns button.active {
+  max-width: 110px;
 }
 
 .btn-present {
@@ -722,7 +730,7 @@ body {
   background: var(--success);
   color: #fff;
   box-shadow: 0 0 28px var(--success-glow), 0 0 60px var(--success-glow);
-  animation: scalePop 0.35s var(--ease-spring);
+  animation: scalePop 0.5s var(--ease-smooth);
 }
 
 .btn-present:hover:not(.active) {
@@ -749,7 +757,7 @@ body {
   background: var(--danger);
   color: #fff;
   box-shadow: 0 0 28px var(--danger-glow), 0 0 60px var(--danger-glow);
-  animation: scalePop 0.35s var(--ease-spring);
+  animation: scalePop 0.5s var(--ease-smooth);
 }
 
 .btn-absent:hover:not(.active) {
@@ -769,7 +777,7 @@ body {
   background: var(--warning);
   color: #fff;
   box-shadow: 0 0 28px var(--warning-glow), 0 0 60px var(--warning-glow);
-  animation: scalePop 0.35s var(--ease-spring);
+  animation: scalePop 0.5s var(--ease-smooth);
 }
 
 .btn-hostel:hover:not(.active) {
@@ -780,7 +788,7 @@ body {
 }
 
 .attn-btns button.active {
-  animation: scalePop 0.35s var(--ease-spring);
+  animation: scalePop 0.5s var(--ease-smooth);
 }
 
 .crud-btns {
@@ -1299,11 +1307,13 @@ body {
   display: inline-block;
   padding: 10px 22px;
   border-radius: 12px;
+  border: none;
   background: linear-gradient(135deg, #f59e0b, #f97316);
   color: #fff;
   font-weight: 700;
   font-size: 14px;
-  text-decoration: none;
+  font-family: inherit;
+  cursor: pointer;
   white-space: nowrap;
   box-shadow: 0 0 20px rgba(245, 158, 11, 0.5), 0 0 50px rgba(245, 158, 11, 0.25);
   animation: glowPro 2s ease-in-out infinite alternate;
@@ -1341,7 +1351,13 @@ body {
   }
   #printReport .print-sub {
     font-size: 11px;
-    margin-bottom: 8px;
+    margin-bottom: 4px;
+  }
+  #printReport .print-creator {
+    font-size: 10px;
+    font-weight: 700;
+    color: #000;
+    margin-bottom: 10px;
   }
   #printReport table {
     width: 100%;

@@ -21,7 +21,7 @@
         <h1>Mars Attendance</h1>
         <div class="subtitle"><a href="https://arjunmanigandan.vercel.app/" target="_blank" rel="noopener" class="footer-link">Created by ARJUN M</a></div>
       </div>
-      <a href="https://pay.mypaylink.in?q=GVwcqK" target="_blank" rel="noopener" class="pro-btn">Get Pro</a>
+      <button class="pro-btn" id="proBtn">Get Pro @129 INR</button>
     </div>
 
     <!-- Add Student -->
@@ -248,7 +248,6 @@
       const category = addCategory.value;
       if (!cls || !category) return;
       if (students.length >= 25) {
-        alert('Free limit of 25 students reached!\n\nGet PRO for unlimited students:');
         window.open('https://pay.mypaylink.in?q=GVwcqK', '_blank');
         return;
       }
@@ -346,9 +345,9 @@
           const catClass = s.category ? `badge-${s.category}` : 'badge-hostel';
           const clsLabel = s.class === '12' ? '12th' : '10th';
           const btns = [
-            { action: 'hostel', label: 'Hostel', short: 'H' },
-            { action: 'absent', label: 'Absent', short: 'A' },
             { action: 'present', label: 'Present', short: 'P' },
+            { action: 'absent', label: 'Absent', short: 'A' },
+            { action: 'hostel', label: 'Hostel', short: 'H' },
           ].sort((a, b) => {
             if (a.action === status) return -1;
             if (b.action === status) return 1;
@@ -385,7 +384,6 @@
       const container = card.querySelector('.attn-btns');
       const btns = [...container.querySelectorAll('button')];
 
-      // Update classes and text
       btns.forEach(b => {
         const a = b.dataset.action;
         const isActive = a === status;
@@ -393,36 +391,6 @@
         b.textContent = isActive
           ? (a === 'present' ? 'Present' : a === 'absent' ? 'Absent' : 'Hostel')
           : (a === 'present' ? 'P' : a === 'absent' ? 'A' : 'H');
-      });
-
-      if (!status) return;
-
-      // FLIP: reorder active button to front with smooth animation
-      const activeBtn = container.querySelector('.active');
-      if (!activeBtn || btns[0] === activeBtn) return;
-
-      const oldRects = btns.map(b => b.getBoundingClientRect());
-      container.prepend(activeBtn);
-
-      // Force layout so new positions are computed
-      container.offsetHeight;
-
-      const newBtns = container.querySelectorAll('button');
-      newBtns.forEach((b, i) => {
-        const newRect = b.getBoundingClientRect();
-        const oldRect = oldRects.find((_, idx) => btns[idx] === b);
-        if (!oldRect) return;
-        const dx = oldRect.left - newRect.left;
-        if (dx !== 0) {
-          b.animate([
-            { transform: `translateX(${dx}px)` },
-            { transform: 'translateX(0)' }
-          ], {
-            duration: 1300,
-            easing: 'cubic-bezier(0.16, 1, 0.3, 1)',
-            fill: 'both'
-          });
-        }
       });
     }
 
@@ -650,19 +618,24 @@
       document.getElementById('printReport').innerHTML = `
         <h2>Mars Attendance &mdash; Daily Report</h2>
         <div class="print-sub">${dateStr}</div>
+        <div class="print-creator">App Created By ARJUN M</div>
         <table>
           <thead><tr><th>Roll.No</th><th>Name</th><th>Class</th><th>Category</th><th>Morning</th><th>Afternoon</th></tr></thead>
           <tbody>${rows}</tbody>
         </table>
         <div class="print-footer">
-          Mars Attendance &copy;2026 All Rights Reserved<br>
-          Created by ARJUN M
+          Mars Attendance &copy;2026 All Rights Reserved
         </div>
       `;
 
       setTimeout(() => {
         window.print();
       }, 100);
+    });
+
+    // ===== PRO BUTTON =====
+    document.getElementById('proBtn').addEventListener('click', () => {
+      window.open('https://pay.mypaylink.in?q=GVwcqK', '_blank');
     });
 
     // ===== INIT =====
