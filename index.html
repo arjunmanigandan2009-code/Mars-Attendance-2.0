@@ -10,6 +10,13 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="splash-screen" id="splashScreen">
+    <div class="splash-content">
+      <div class="splash-title">Mars Attendance</div>
+      <div class="splash-loader"></div>
+    </div>
+  </div>
+
   <div class="container">
     <!-- Header -->
     <div class="header">
@@ -17,7 +24,7 @@
         <h1>Mars Attendance</h1>
         <div class="subtitle"><a href="https://arjunmanigandan.vercel.app/" target="_blank" rel="noopener" class="footer-link">Created by ARJUN M</a></div>
       </div>
-      <button class="theme-btn" id="themeToggle" title="Toggle theme">&#9790;</button>
+      <a href="https://q.me-qr.com/qws8jjwl" target="_blank" rel="noopener" class="pro-btn">Get Pro @129 INR</a>
     </div>
 
     <!-- Add Student -->
@@ -88,6 +95,7 @@
     </div>
     <div class="footer">
       Mars Attendance &copy;2026 All Rights Reserved &mdash; <a href="https://arjunmanigandan.vercel.app/" target="_blank" rel="noopener" class="footer-link">Contact Developer</a>
+      <button class="theme-btn footer-theme-btn" id="themeToggle" title="Toggle theme">&#9790;</button>
     </div>
   </div>
 
@@ -242,6 +250,11 @@
       const cls = addClass.value;
       const category = addCategory.value;
       if (!cls || !category) return;
+      if (students.length >= 25) {
+        alert('Free limit of 25 students reached!\n\nGet PRO for unlimited students:');
+        window.open('https://q.me-qr.com/qws8jjwl', '_blank');
+        return;
+      }
       students.push({ id: nextId++, name, class: cls, category });
       saveStudents();
       addName.value = '';
