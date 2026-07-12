@@ -11,10 +11,7 @@
 </head>
 <body>
   <div class="splash-screen" id="splashScreen">
-    <div class="splash-content">
-      <div class="splash-title">Mars Attendance</div>
-      <div class="splash-loader"></div>
-    </div>
+    <img src="splash.png" alt="Mars Attendance" class="splash-img">
   </div>
 
   <div class="container">
@@ -95,7 +92,7 @@
     </div>
     <div class="footer">
       Mars Attendance &copy;2026 All Rights Reserved &mdash; <a href="https://arjunmanigandan.vercel.app/" target="_blank" rel="noopener" class="footer-link">Contact Developer</a>
-      <button class="theme-btn footer-theme-btn" id="themeToggle" title="Toggle theme">&#9790;</button>
+      <div><button class="theme-btn" id="themeToggle" title="Toggle theme">&#9790; Theme</button></div>
     </div>
   </div>
 
@@ -312,10 +309,10 @@
     function applyTheme() {
       if (isDark) {
         document.body.classList.add('dark');
-        themeToggle.innerHTML = '&#9728;';
+        themeToggle.innerHTML = '&#9728; Theme';
       } else {
         document.body.classList.remove('dark');
-        themeToggle.innerHTML = '&#9790;';
+        themeToggle.innerHTML = '&#9790; Theme';
       }
       localStorage.setItem('marsTheme', isDark ? 'dark' : 'light');
     }
@@ -675,7 +672,7 @@
     setTimeout(() => {
       const splash = document.getElementById('splashScreen');
       if (splash) splash.remove();
-    }, 2100);
+    }, 5500);
   </script>
 </body>
 </html>
