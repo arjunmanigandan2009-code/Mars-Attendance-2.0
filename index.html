@@ -24,7 +24,7 @@
         <h1>Mars Attendance</h1>
         <div class="subtitle"><a href="https://arjunmanigandan.vercel.app/" target="_blank" rel="noopener" class="footer-link">Created by ARJUN M</a></div>
       </div>
-      <a href="https://q.me-qr.com/qws8jjwl" target="_blank" rel="noopener" class="pro-btn">Get Pro @129 INR</a>
+      <a href="https://pay.mypaylink.in?q=GVwcqK" target="_blank" rel="noopener" class="pro-btn">Get Pro</a>
     </div>
 
     <!-- Add Student -->
@@ -252,7 +252,7 @@
       if (!cls || !category) return;
       if (students.length >= 25) {
         alert('Free limit of 25 students reached!\n\nGet PRO for unlimited students:');
-        window.open('https://q.me-qr.com/qws8jjwl', '_blank');
+        window.open('https://pay.mypaylink.in?q=GVwcqK', '_blank');
         return;
       }
       students.push({ id: nextId++, name, class: cls, category });
@@ -670,6 +670,12 @@
 
     // ===== INIT =====
     render();
+
+    // ===== SPLASH SCREEN =====
+    setTimeout(() => {
+      const splash = document.getElementById('splashScreen');
+      if (splash) splash.remove();
+    }, 2100);
   </script>
 </body>
 </html>
